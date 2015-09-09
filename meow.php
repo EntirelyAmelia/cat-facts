@@ -24,7 +24,7 @@ function getCatMeowArray($num = 1) {
     $request = API . '?number=' . $num;
     if ($raw = file_get_contents($request)) {
         if ($meows = json_decode($raw)) {
-            if ($meows->success) {
+            if ($meows->success === 'true') {
                 return $meows->facts;
             }
         }
