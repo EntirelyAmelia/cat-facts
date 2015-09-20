@@ -6,8 +6,13 @@ prompt();
 
 function prompt() {
     echo 'How many meows would you like? ';
-    $num = fgets(STDIN);
-    if ((int)$num == $num) {
+    $input = fgets(STDIN);
+
+    if (trim($input) == 'exit') {
+        exit(0);
+    }
+
+    if ($num = filter_var($input, FILTER_VALIDATE_INT)) {
         if ($facts = getCatMeowArray($num)) {
             meow($facts);
         } else {
@@ -35,8 +40,11 @@ function getCatMeowArray($num = 1) {
 
 function meow($facts) {
     echo "\n";
+
+    $x = 1;
     foreach ($facts as $fact) {
-        echo $fact . "\n";
+        echo $x++ . '. ' . $fact . "\n\n";
     }
+
     echo "\n";
 }
